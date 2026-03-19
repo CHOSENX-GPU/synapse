@@ -130,6 +130,10 @@ Each plugin has its own detailed README:
 - [synapse-worktree](synapse-worktree/README.md) -- Worktree management
 - [synapse-git](synapse-git/README.md) -- Git automation
 
+## Acknowledgments
+
+The EARS (Evolving Autonomous Research System) integrated in synapse-ears is based on the work of **Tianhan Zhang** ([EARS-deploy](https://github.com/TianhanZhang68/EARS-deploy)). His structured knowledge capture methodology -- four-tier architecture, trace.md auto-discovery, and PostToolUse hook design -- forms the foundation of the EARS plugin.
+
 ## License
 
 MIT License. See [LICENSE](LICENSE).

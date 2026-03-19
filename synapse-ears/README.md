@@ -96,6 +96,10 @@ synapse-ears works standalone but integrates with the Synapse family:
 - **Python 3.8+** (for the EARS hook)
 - **git** (for project root detection)
 
+## Acknowledgments
+
+The EARS (Evolving Autonomous Research System) is based on the work of **Tianhan Zhang** ([EARS-deploy](https://github.com/TianhanZhang68/EARS-deploy)). His structured knowledge capture methodology -- four-tier architecture, trace.md auto-discovery, and PostToolUse hook design -- forms the foundation of this plugin.
+
 ## License
 
 MIT License. See [LICENSE](../LICENSE).
