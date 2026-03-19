@@ -1,0 +1,19 @@
+{
+  "name": "synapse",
+  "owner": {
+    "name": "CHOSENX",
+    "url": "https://github.com/CHOSENX-GPU"
+  },
+  "metadata": {
+    "description": "Synapse -- Multi-AI collaboration workflow plugin with EARS integration",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "synapse",
+      "source": "./",
+      "description": "Plan-review, plan-execute, code-review, worktree management, automated git, Codex/Cursor bridge",
+      "version": "1.0.0"
+    }
+  ]
+}
