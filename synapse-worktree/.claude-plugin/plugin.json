@@ -1,0 +1,12 @@
+{
+  "name": "synapse-worktree",
+  "version": "1.0.0",
+  "description": "Git worktree lifecycle management: create, list, switch, handoff, and cleanup for parallel multi-agent development",
+  "author": {
+    "name": "CHOSENX",
+    "url": "https://github.com/CHOSENX-GPU"
+  },
+  "repository": "https://github.com/CHOSENX-GPU/synapse",
+  "license": "MIT",
+  "keywords": ["worktree", "git", "parallel-development", "agent-handoff"]
+}

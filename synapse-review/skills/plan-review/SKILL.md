@@ -12,8 +12,8 @@ Claude Code creates a technical plan, then delegates adversarial review to Codex
 
 ## Prerequisites
 
-- If working in a worktree, confirm `.worktree-spec.md` exists
-- Check `KNOWN_ISSUES.md` for issues relevant to the current task
+- If working in a worktree **(requires synapse-worktree)**, confirm `.worktree-spec.md` exists
+- Check `KNOWN_ISSUES.md` for issues relevant to the current task (if it exists)
 
 ## Working Directory
 
@@ -80,17 +80,20 @@ bash <plugin-scripts-dir>/ask_codex.sh "<review-prompt>" read-only "<working-dir
 
 - **Unresolved CRITICAL issues remain** → return to STEP 2 (same SESSION_ID)
 - **Only MEDIUM/LOW remain** → ask user whether to address or accept
-- **User satisfied** → update `.worktree-spec.md` context section → output final plan path
+- **User satisfied** → if synapse-worktree is installed, update `.worktree-spec.md` context section → output final plan path
 - **Maximum 5 rounds** — if still unresolved after 5, escalate to user
 
 ### Output
 
 - Final plan file path
-- If in a worktree, auto-update `.worktree-spec.md` Context section
+- If synapse-worktree is installed and in a worktree, auto-update `.worktree-spec.md` Context section
 - If review revealed recurring problem patterns, consider promoting to KNOWN_ISSUES.md
 
-## EARS Integration
+## EARS Integration (requires synapse-ears)
 
+If synapse-ears is installed:
 - Each review round writes a Checkpoint to `traces/<task>/trace.md`
 - Recurring issues across multiple reviews → promote to KNOWN_ISSUES.md
 - If the plan is abandoned → write EARS Dead End entry
+
+If synapse-ears is NOT installed, skip EARS entries.

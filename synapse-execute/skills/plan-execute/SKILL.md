@@ -23,8 +23,8 @@ Ask the user before starting:
 ### STEP 1: Load Plan
 
 1. Read the specified plan file
-2. If in a worktree, also read `.worktree-spec.md` for context
-3. Check `KNOWN_ISSUES.md` for related entries
+2. If synapse-worktree is installed and in a worktree, also read `.worktree-spec.md` for context
+3. Check `KNOWN_ISSUES.md` for related entries (if it exists)
 
 ### STEP 2: Decompose into Execution Batches
 
@@ -76,7 +76,7 @@ Send fix instructions via the same SESSION_ID (MCP) or new shell call. Maximum 3
 
 **3e. Batch Passes**
 
-Auto-commit:
+If synapse-git is installed, use `/commit`; otherwise run manual `git add -A && git commit -m '{type}({scope}): implement {batch-description}'`:
 ```
 {type}({scope}): implement {batch-description}
 
@@ -84,23 +84,26 @@ Batch {N}/{total} of plan {plan-name}
 Reviewed by: Claude Code (auto-review passed)
 ```
 
-Write EARS Checkpoint. Update `.worktree-spec.md` completed/pending lists.
+If synapse-ears is installed, write EARS Checkpoint. If synapse-worktree is installed, update `.worktree-spec.md` completed/pending lists.
 
 ### STEP 4: All Batches Complete
 
 1. Run tests if a test command is known (check CLAUDE.md or package.json)
 2. Output execution summary
-3. `git push`
+3. If synapse-git is installed, use `/push`; otherwise `git push`
 4. If vibe-kanban is running, update task status to Review
 
 ## Limits
 
 - Each batch: max 3 fix rounds
-- After 3 failed rounds: mark as NEEDS_MANUAL_FIX, write EARS Dead End, continue to next batch
+- After 3 failed rounds: mark as NEEDS_MANUAL_FIX, if synapse-ears is installed write EARS Dead End, continue to next batch
 - Report all NEEDS_MANUAL_FIX items in the final summary
 
-## EARS Integration
+## EARS Integration (requires synapse-ears)
 
+If synapse-ears is installed:
 - Each batch completion writes a Checkpoint
 - Failed batches write a Dead End
 - Recurring failures → promote pattern to KNOWN_ISSUES.md
+
+If synapse-ears is NOT installed, skip EARS entries.

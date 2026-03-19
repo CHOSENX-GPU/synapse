@@ -1,0 +1,12 @@
+{
+  "name": "synapse-git",
+  "version": "1.0.0",
+  "description": "Automated git operations with Conventional Commits: /save, /commit, /push, /pr, /squash-merge",
+  "author": {
+    "name": "CHOSENX",
+    "url": "https://github.com/CHOSENX-GPU"
+  },
+  "repository": "https://github.com/CHOSENX-GPU/synapse",
+  "license": "MIT",
+  "keywords": ["git", "conventional-commits", "auto-commit", "pull-request"]
+}

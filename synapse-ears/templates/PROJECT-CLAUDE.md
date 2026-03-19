@@ -89,24 +89,6 @@ When an insight is general (understood, applies broadly, has a natural home in
 a shared artifact), transfer it there — KNOWN_ISSUES.md, this file, code, or
 tests — wherever future work would look for it.
 
-## Multi-AI Collaboration (Synapse)
-
-### Agent Roles
-- **Claude Code**: orchestrator — planning, review adjudication, git operations, EARS management
-- **Codex** (via MCP): executor/reviewer — code generation, adversarial review
-- **Cursor** (via CLI or standalone): alternative executor — works in worktrees with spec documents
-
-### Collaboration Rules
-1. Non-trivial tasks: `/plan-review` first, then `/plan-execute`
-2. Codex review stage: read-only sandbox
-3. All plans, reviews, execution records persist to `./plans/`
-4. Key milestones auto-write EARS entries
-5. One logical unit per commit, Conventional Commits format
-6. Worktree switches require `.worktree-spec.md` update
-
-### Codex MCP Call Convention
-Tool: mcp__codex__codex | Required: PROMPT, cd | Review: sandbox="read-only" | Execute: sandbox="workspace-write"
-
 ## Learning & Experiments
 
 - Maintain `LEARNING.md` per project: tech decisions, new concepts, mistakes, lessons

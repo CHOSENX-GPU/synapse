@@ -1,0 +1,12 @@
+{
+  "name": "synapse-review",
+  "version": "1.0.0",
+  "description": "Adversarial plan review and deep code review via Claude Code, Codex, and Cursor cross-agent collaboration",
+  "author": {
+    "name": "CHOSENX",
+    "url": "https://github.com/CHOSENX-GPU"
+  },
+  "repository": "https://github.com/CHOSENX-GPU/synapse",
+  "license": "MIT",
+  "keywords": ["review", "plan-review", "code-review", "codex", "cursor", "multi-ai"]
+}

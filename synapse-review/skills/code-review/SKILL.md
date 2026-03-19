@@ -82,7 +82,7 @@ Write to `./plans/code-review-{timestamp}.md`:
 ## Handling Results
 
 ### APPROVED
-- Auto-run `/commit` + `/push`
+- If synapse-git is installed, auto-run `/commit` + `/push`; otherwise `git add -A && git commit && git push` manually
 - Notify user of approval
 
 ### NEEDS_FIX
@@ -95,9 +95,12 @@ Write to `./plans/code-review-{timestamp}.md`:
 - Write EARS Dead End entry with findings
 - Do NOT auto-commit
 
-## EARS Integration
+## EARS Integration (requires synapse-ears)
 
+If synapse-ears is installed:
 - Review findings that reveal error patterns → write EARS Error entry
 - If the same type of issue appears across 2+ reviews → promote to KNOWN_ISSUES.md
 - Review completion → write EARS Checkpoint
 - Major rework decision → write EARS Dead End
+
+If synapse-ears is NOT installed, skip EARS entries.

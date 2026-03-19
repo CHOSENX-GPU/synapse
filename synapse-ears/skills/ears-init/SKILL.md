@@ -67,7 +67,7 @@ Scan the project to build a profile:
 
 ### Phase 2: Generate Project CLAUDE.md
 
-Use the project analysis to fill in a CLAUDE.md. Use the template from the Synapse plugin's `templates/PROJECT-CLAUDE.md` as the base structure.
+Use the project analysis to fill in a CLAUDE.md. Use the template from this plugin's `templates/PROJECT-CLAUDE.md` as the base structure.
 
 **If CLAUDE.md already exists:**
 - Read it fully

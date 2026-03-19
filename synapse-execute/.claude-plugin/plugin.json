@@ -1,0 +1,12 @@
+{
+  "name": "synapse-execute",
+  "version": "1.0.0",
+  "description": "Orchestrated plan execution via Codex/Cursor/Claude with batch review, fix loops, and auto-commit",
+  "author": {
+    "name": "CHOSENX",
+    "url": "https://github.com/CHOSENX-GPU"
+  },
+  "repository": "https://github.com/CHOSENX-GPU/synapse",
+  "license": "MIT",
+  "keywords": ["execute", "plan-execute", "codex", "cursor", "delegation"]
+}

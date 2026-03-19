@@ -1,0 +1,12 @@
+{
+  "name": "synapse-ears",
+  "version": "1.0.0",
+  "description": "EARS (Evolving Autonomous Research System) - project-aware knowledge capture with auto-discovery hook and tech-stack-specific initialization",
+  "author": {
+    "name": "CHOSENX",
+    "url": "https://github.com/CHOSENX-GPU"
+  },
+  "repository": "https://github.com/CHOSENX-GPU/synapse",
+  "license": "MIT",
+  "keywords": ["ears", "knowledge-capture", "trace", "error-tracking"]
+}

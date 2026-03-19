@@ -5,15 +5,39 @@
     "url": "https://github.com/CHOSENX-GPU"
   },
   "metadata": {
-    "description": "Synapse -- Multi-AI collaboration workflow plugin with EARS integration",
-    "version": "1.0.0"
+    "description": "Synapse -- Modular multi-AI collaboration plugins for Claude Code",
+    "version": "2.0.0"
   },
   "plugins": [
     {
-      "name": "synapse",
-      "source": "./",
-      "description": "Plan-review, plan-execute, code-review, worktree management, automated git, Codex/Cursor bridge",
-      "version": "1.1.0"
+      "name": "synapse-ears",
+      "source": "./synapse-ears",
+      "description": "EARS knowledge capture system with project-aware initialization",
+      "version": "1.0.0"
+    },
+    {
+      "name": "synapse-review",
+      "source": "./synapse-review",
+      "description": "Adversarial plan review and cross-agent code review",
+      "version": "1.0.0"
+    },
+    {
+      "name": "synapse-execute",
+      "source": "./synapse-execute",
+      "description": "Orchestrated plan execution via Codex/Cursor/Claude",
+      "version": "1.0.0"
+    },
+    {
+      "name": "synapse-worktree",
+      "source": "./synapse-worktree",
+      "description": "Git worktree lifecycle for parallel multi-agent development",
+      "version": "1.0.0"
+    },
+    {
+      "name": "synapse-git",
+      "source": "./synapse-git",
+      "description": "Automated git with Conventional Commits, PR, squash-merge",
+      "version": "1.0.0"
     }
   ]
 }

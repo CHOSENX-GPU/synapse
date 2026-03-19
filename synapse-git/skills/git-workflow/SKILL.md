@@ -64,7 +64,7 @@ Create a Pull Request.
 3. Generate PR description:
    - Change summary (from commits)
    - Reference to plan file (if in `./plans/`)
-   - EARS key findings (if in `traces/`)
+   - If synapse-ears is installed, EARS key findings (if in `traces/`)
 4. Run: `gh pr create --title "{title}" --body "{description}"`
    - If no title provided, generate from branch name
 5. If vibe-kanban task exists, add reference in PR description
@@ -74,8 +74,8 @@ Create a Pull Request.
 Merge an approved PR and clean up.
 
 1. `gh pr merge --squash`
-2. Run `/worktree cleanup` for the corresponding worktree (if applicable)
-3. Check if any EARS entries from this branch should be promoted to KNOWN_ISSUES.md
+2. If synapse-worktree is installed, run `/worktree cleanup` for the corresponding worktree
+3. If synapse-ears is installed, check if any EARS entries from this branch should be promoted to KNOWN_ISSUES.md
 
 ## Conventional Commits Reference
 
@@ -91,21 +91,19 @@ Merge an approved PR and clean up.
 | ci       | CI/CD changes                                 |
 | build    | Build system changes                          |
 
-## Auto-Commit Triggers (from orchestration layer)
+## Auto-Commit Triggers (from companion plugins)
 
-The following scenarios trigger automatic `/commit`:
-- plan-execute completes a batch and passes code-review
-- plan-review completes a revision round
-- worktree handoff (before handoff)
+These triggers come from companion plugins if installed:
+- synapse-execute: plan-execute completes a batch and passes code-review
+- synapse-review: plan-review completes a revision round
+- synapse-worktree: worktree handoff (before handoff)
 
-## EARS Integration
+## EARS Integration (requires synapse-ears)
 
+If synapse-ears is installed:
 - After important commits, write an EARS Checkpoint if warranted
 - The EARS PostToolUse hook (ears-trace.py) continues to work independently
 - On `/squash-merge`, check traces/ for patterns worth promoting to KNOWN_ISSUES.md
-
-## PostToolUse Hook Coordination
-
-git-workflow works alongside the EARS ears-trace.py hook:
 - ears-trace.py detects errors in Bash output → triggers EARS Error prompt
-- At important EARS Checkpoints, consider auto-running `/save`
+
+If synapse-ears is NOT installed, skip EARS entries.

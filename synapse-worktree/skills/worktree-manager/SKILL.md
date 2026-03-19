@@ -39,7 +39,7 @@ Manage git worktrees for parallel multi-agent development. Each worktree gets it
    - Default base-branch is `main` if not specified
 3. Copy the worktree-spec.md template into the new worktree as `.worktree-spec.md`
    - Fill in `{branch-name}`, `{timestamp}` (ISO 8601), `{agent}` (default: "Claude Code")
-4. Create `traces/<branch-name>/trace.md` in the new worktree with header:
+4. If synapse-ears is installed, create `traces/<branch-name>/trace.md` in the new worktree with header:
    ```
    # EARS Trace: <branch-name>
    ```
@@ -57,18 +57,18 @@ Manage git worktrees for parallel multi-agent development. Each worktree gets it
 
 ### /worktree switch <branch-name> [--to-agent <agent-name>]
 
-1. If current worktree has uncommitted changes, run `/save` (from git-workflow skill)
+1. If current worktree has uncommitted changes: if synapse-git is installed, run `/save`; otherwise `git add -A && git commit -m "wip: save before switch"`
 2. Update current worktree's `.worktree-spec.md` handoff notes
 3. Change working directory to the target worktree
 4. Read target worktree's `.worktree-spec.md` to restore context
-5. Read target worktree's `traces/<branch>/trace.md` for recent EARS entries
+5. If synapse-ears is installed, read target worktree's `traces/<branch>/trace.md` for recent EARS entries
 6. If `--to-agent` specified, update the spec's Current Agent field
 7. Report context summary to user
 
 ### /worktree handoff <branch-name> --to <agent-name>
 
 1. Generate a summary of current work state from `.worktree-spec.md`
-2. Extract key EARS entries from `traces/<branch>/trace.md`
+2. If synapse-ears is installed, extract key EARS entries from `traces/<branch>/trace.md`
 3. Update `.worktree-spec.md`:
    - Set Current Agent to the target agent
    - Fill in Handoff Notes with completed work, encountered issues, recommendations
@@ -95,11 +95,14 @@ Manage git worktrees for parallel multi-agent development. Each worktree gets it
    - Warn the user: "Branch <branch-name> has not been merged to main. Are you sure?"
    - Only proceed if user confirms
 
-## EARS Integration
+## EARS Integration (requires synapse-ears)
 
+If synapse-ears is installed:
 - `/worktree create` writes an EARS Checkpoint to the new worktree's trace.md
 - `/worktree handoff` writes an EARS Checkpoint before handoff
 - Knowledge files (KNOWN_ISSUES.md, CLAUDE.md) live in the main worktree; changes must be committed to main first, then rebased/merged into feature worktrees
+
+If synapse-ears is NOT installed, skip EARS entries and trace.md creation.
 
 ## Vibe-Kanban Integration
 
