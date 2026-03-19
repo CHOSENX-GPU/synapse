@@ -2,7 +2,7 @@
 name: setup
 description: |
   First-run setup for the Synapse plugin. Configures Codex MCP, updates global
-  CLAUDE.md and settings.json, verifies EARS compatibility.
+  CLAUDE.md and settings.json, installs improved EARS hook, verifies compatibility.
   Use when the user says /setup, "setup synapse", "configure synapse",
   or after first installing the synapse plugin.
 ---
@@ -78,6 +78,7 @@ Tool: mcp__codex__codex | Required: PROMPT, cd | Review: sandbox="read-only" | E
 - `/code-review` — deep code review (supports cross-agent review)
 - `/worktree create/list/switch/handoff/cleanup` — worktree lifecycle management
 - `/commit` `/save` `/push` `/pr` `/squash-merge` — automated git operations
+- `/ears-init` — project-aware EARS initialization
 ```
 
 ### 4. Update ~/.claude/settings.json
@@ -94,11 +95,43 @@ Merge `"mcp__codex__codex"` into the `allowedTools` array:
 
 If `allowedTools` doesn't exist yet, create it. If it exists, append to the array.
 
-### 5. Verify EARS Compatibility
+### 5. Install/Upgrade EARS Hook (optional)
+
+Check if the current EARS hook supports trace.md auto-discovery:
+- Read `~/.claude/scripts/ears-trace.py`
+- Look for the `find_trace_context` function
+
+If the hook is missing or outdated (lacks auto-discovery):
+1. Copy the improved hook from this plugin's `hooks/ears-trace.py` to `~/.claude/scripts/ears-trace.py`
+2. Verify `~/.claude/settings.json` PostToolUse hook points to:
+   ```json
+   {
+     "hooks": {
+       "PostToolUse": [{
+         "matcher": "Write|Edit|Bash",
+         "hooks": [{
+           "type": "command",
+           "command": "python ~/.claude/scripts/ears-trace.py",
+           "timeout": 10
+         }]
+       }]
+     }
+   }
+   ```
+
+The improved hook adds:
+- **trace.md auto-discovery**: walks up the directory tree from the edited file to find the nearest trace.md
+- **Context naming**: uses the directory name as context for rate limiting and prompts
+- **Missing trace.md reminder**: prompts to create trace.md if none exists (5min cooldown)
+- **Project-specific error patterns**: loads custom patterns from `ears-config.json` in the project root
+- **Better file skipping**: ignores .claude/, .git/, __pycache__, node_modules/, trace.md itself
+
+If the user prefers to keep their current hook, that's fine.
+
+### 6. Verify EARS Compatibility
 
 Confirm these files are intact and unmodified:
 
-- `~/.claude/scripts/ears-trace.py` — PostToolUse hook
 - `~/.claude/modules/ears-system.md` — EARS system description
 - `~/.cursor/rules/ears-principles.mdc` — Cursor design principles
 - `~/.cursor/rules/ears-knowledge-system.mdc` — Cursor EARS rules
@@ -106,18 +139,19 @@ Confirm these files are intact and unmodified:
 
 If any are missing, warn the user. Synapse skills complement EARS but do not replace it.
 
-### 6. Verify Plugin Skills
+### 7. Verify Plugin Skills
 
 List available skills to confirm Synapse is loaded:
 ```bash
 claude skills list 2>/dev/null || echo "Check plugin installation"
 ```
 
-Expected skills: plan-review, plan-execute, code-review, worktree-manager, git-workflow, codex-bridge, setup.
+Expected skills: plan-review, plan-execute, code-review, worktree-manager, git-workflow, codex-bridge, ears-init, setup.
 
 ## Post-Setup
 
 After setup is complete, you can:
+- Use `/ears-init` to set up EARS for the current project (recommended first step)
 - Use `/worktree create feature-xxx` to start a new feature branch
 - Use `/plan-review <task description>` to create and review a plan
 - Use `/commit` to make Conventional Commits automatically

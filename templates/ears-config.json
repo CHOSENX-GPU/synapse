@@ -1,0 +1,7 @@
+{
+  "error_patterns": [],
+  "checkpoint_interval": 10,
+  "error_cooldown_seconds": 120,
+  "checkpoint_cooldown_seconds": 600,
+  "ignore_paths": [".claude/", ".git/", "__pycache__/", "node_modules/"]
+}

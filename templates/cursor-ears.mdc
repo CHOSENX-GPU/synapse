@@ -1,0 +1,54 @@
+---
+description: "EARS knowledge capture system for <project-name> — structured recording of errors, decisions, and discoveries"
+alwaysApply: true
+---
+
+# EARS — Evolving Autonomous Research System
+
+Structured knowledge capture that survives across sessions.
+
+## When to Write EARS Entries
+
+Since there are no automatic hooks in Cursor, follow these rules manually:
+
+- **Error**: When you encounter an error, exception, or unexpected failure — write an EARS Error entry to the project's `traces/<task>/trace.md` after fixing it
+- **Checkpoint**: After completing a significant milestone or making an important decision — write an EARS Checkpoint entry
+- **Dead End**: When an approach fails and you switch strategies — write an EARS Dead End entry
+
+Create `traces/<task>/trace.md` if it doesn't exist.
+
+## Entry Formats
+
+```
+### EARS — Error (YYYY-MM-DD HH:MM)
+- Problem: what failed and the error message
+- Diagnosis: how you identified the root cause
+- Fix: what you changed and why it works
+- Lesson: what would prevent this in the future
+
+### EARS — Checkpoint (YYYY-MM-DD HH:MM)
+- Discovery: key findings or decisions since last checkpoint
+- Decision: choices made and their rationale
+- Status: current progress and next steps
+
+### EARS — Dead End (YYYY-MM-DD HH:MM)
+- Approach: what was attempted
+- Why it failed: reason
+- Alternative: what to try instead
+```
+
+## Four-Tier Knowledge Architecture
+
+- **Tier 1** `traces/<task>/trace.md` — per-task raw records
+- **Tier 2** `KNOWN_ISSUES.md` — cross-task patterns (promote when same issue appears 2+ times)
+- **Tier 3** `CLAUDE.md` / `AGENTS.md` — project-level principles (promote when pattern has project-wide impact)
+- **Tier 4** `~/.claude/memory/pitfalls.md` — cross-project universal lessons
+
+Do not promote prematurely — wait for patterns to emerge naturally.
+
+## Lessons-Learned Pattern
+
+When an insight is general and applies broadly, transfer it to the appropriate shared artifact:
+- KNOWN_ISSUES.md for recurring problems
+- CLAUDE.md for project-level principles
+- Code or tests for enforceable rules
